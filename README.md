@@ -33,3 +33,40 @@ model connectingTobasics{
     basic_id        Int
 }
 ```
+
+Ha ezek megvannak jöhet ez után a seed-elés ha kötelező
+
+```
+import dotenv from 'dotenv';
+dotenv.config();
+
+//ez ahoz szökséges hogy tudjunk elemeket létrehozni
+import { PrismaClient } from '../generated/prisma/client';
+
+const prisma = new PrismaClient();
+
+async function itemfiller() {
+    await prisma.{/*bármilyen prisma model*/}.create({
+      data:{
+        //ide kerülnek az elemek értékének megadása
+      }
+    })
+
+
+    //ez nem kötelező de legalább jelzi hogy lefutott minden
+    console.log("Seeding done")
+}
+
+
+//ezzel a résszel indul el az elözöleg megírt kód és hozunk létre elemeket az adatbázisban
+itemfiller()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
+```
+
