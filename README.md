@@ -40,7 +40,7 @@ Ha ezek megvannak jöhet ez után a seed-elés ha kötelező
 import dotenv from 'dotenv';
 dotenv.config();
 
-//ez ahoz szökséges hogy tudjunk elemeket létrehozni
+//ez ahoz szükséges hogy tudjunk elemeket létrehozni
 import { PrismaClient } from '../generated/prisma/client';
 
 const prisma = new PrismaClient();
@@ -70,3 +70,33 @@ itemfiller()
   });
 ```
 
+Ezt követően jön a CRUD generálás az alábbi konzol kóddal
+
+```
+npx nest g res {és ide kerül az elnevezés amit szeretnél neki adni}
+```
+
+Ez után következhet a CRUD-ok szerkesztése
+
+Amikor a .service.ts-ben dolgozol hogy csináld a lekérdezés típusait érdemes async-et használni ha azt akarod hogy hibákat adj vissza,
+de ezt akár createDto-ban is meg lehet oldani ha az ellenörzéseknél message-eket hagysz.
+
+createDto megoldás példa:
+
+```
+@IsNotEmpty({ message: 'a megadandó rész nem lehet üres' })
+@IsString({ message: 'a megadandó rész értéke csak szöveg lehet' })
+@IsNumber({ message: 'a megadandó rész értéke csak szám lehet' })
+
+```
+
+.service.ts megoldás:
+
+```
+
+```
+
+
+# Frontend Vite + React + Typescript
+
+## 
